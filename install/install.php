@@ -110,24 +110,25 @@ if (is_file($installFile)) {
         if ($_POST) {
             $code        = filter_var($_POST['code'], FILTER_SANITIZE_STRING);
             $username    = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
-            $curl_handle = curl_init();
-            curl_setopt($curl_handle, CURLOPT_URL, 'https://api.tecdiary.net/v1/license/');
-            curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($curl_handle, CURLOPT_POST, 1);
-            curl_setopt($curl_handle, CURLOPT_SSL_VERIFYPEER, false);
-            $referer = 'http://' . $_SERVER['SERVER_NAME'] . substr($_SERVER['REQUEST_URI'], 0, -24);
-            $path    = substr(realpath(dirname(__FILE__)), 0, -8);
-            curl_setopt($curl_handle, CURLOPT_POSTFIELDS, [
-                'username' => $username,
-                'code'     => $code,
-                'id'       => '5403161',
-                'ip'       => $_SERVER['REMOTE_ADDR'],
-                'referer'  => $referer,
-                'path'     => $path,
-            ]);
-
-            $buffer = curl_exec($curl_handle);
-            curl_close($curl_handle);
+//            $curl_handle = curl_init();
+//            curl_setopt($curl_handle, CURLOPT_URL, 'https://api.tecdiary.net/v1/license/');
+//            curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
+//            curl_setopt($curl_handle, CURLOPT_POST, 1);
+//            curl_setopt($curl_handle, CURLOPT_SSL_VERIFYPEER, false);
+//            $referer = 'http://' . $_SERVER['SERVER_NAME'] . substr($_SERVER['REQUEST_URI'], 0, -24);
+//            $path    = substr(realpath(dirname(__FILE__)), 0, -8);
+//            curl_setopt($curl_handle, CURLOPT_POSTFIELDS, [
+//                'username' => $username,
+//                'code'     => $code,
+//                'id'       => '5403161',
+//                'ip'       => $_SERVER['REMOTE_ADDR'],
+//                'referer'  => $referer,
+//                'path'     => $path,
+//            ]);
+//
+//            $buffer = curl_exec($curl_handle);
+//            curl_close($curl_handle);
+            $buffer = file_get_contents("licences.txt");
             if (!(is_object(json_decode($buffer)))) {
                 $cfc = strip_tags($buffer);
             } else {
@@ -422,20 +423,21 @@ if (is_file($installFile)) {
             $username = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
             define('BASEPATH', 'install/');
             include '../app/config/database.php';
-            $curl_handle = curl_init();
-            curl_setopt($curl_handle, CURLOPT_URL, 'https://api.tecdiary.net/v1/dbtables/');
-            curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($curl_handle, CURLOPT_POST, 1);
-            curl_setopt($curl_handle, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt($curl_handle, CURLOPT_POSTFIELDS, [
-                'username' => $username,
-                'code'     => $code,
-                'id'       => '5403161',
-                'version'  => '3.4',
-                'type'     => 'install',
-            ]);
-            $buffer = curl_exec($curl_handle);
-            curl_close($curl_handle);
+//            $curl_handle = curl_init();
+//            curl_setopt($curl_handle, CURLOPT_URL, 'https://api.tecdiary.net/v1/dbtables/');
+//            curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
+//            curl_setopt($curl_handle, CURLOPT_POST, 1);
+//            curl_setopt($curl_handle, CURLOPT_SSL_VERIFYPEER, false);
+//            curl_setopt($curl_handle, CURLOPT_POSTFIELDS, [
+//                'username' => $username,
+//                'code'     => $code,
+//                'id'       => '5403161',
+//                'version'  => '3.4',
+//                'type'     => 'install',
+//            ]);
+//            $buffer = curl_exec($curl_handle);
+//            curl_close($curl_handle);
+            $buffer = file_get_contents("dbtables.txt");
             $object = json_decode($buffer);
 
             if ($object->status == 'success') {

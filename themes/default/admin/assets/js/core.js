@@ -1475,6 +1475,7 @@ $(document).ready(function () {
     });
     $(document).on('click', '[data-toggle="ajax"]', function (e) {
         e.preventDefault();
+        console.log("Showing Modals---")
         var href = $(this).attr('href');
         $.get(href, function (data) {
             $('#myModal').html(data).modal();
